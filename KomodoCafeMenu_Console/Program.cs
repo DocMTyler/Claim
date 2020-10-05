@@ -41,7 +41,7 @@ namespace KomodoCafeMenu_Console
                     Console.ReadLine();
                     break;
                 }
-                else if (menuInputResponse != 1 && menuInputResponse != 2 && menuInputResponse != 3 && menuInputResponse != 4)
+                else if (menuInputResponse < 1 && menuInputResponse > 4)
                 {
                     Console.WriteLine("Please enter a valid response");
                     menuRunning = true;

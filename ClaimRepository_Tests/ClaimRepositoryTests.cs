@@ -46,15 +46,37 @@ namespace ClaimRepository_Tests
             //Arrange
             Claim claim = new Claim();
             ClaimRepositoryQueue claimRepositoryQueue = new ClaimRepositoryQueue();
-
             claimRepositoryQueue.AddClaimToQueue(claim);
+            var claimQueue = claimRepositoryQueue.ReadClaims();
 
             //ACT
-            bool wasClaimDequeued = claimRepositoryQueue.RemoveClaimFromQueue(claim);
+            var beforeDequeue = claimQueue;
+            claimRepositoryQueue.RemoveClaimFromQueue();
+            bool wasClaimDequeued = claimQueue.Contains(claim);
 
             //Assert
-            Assert.IsTrue(wasClaimDequeued);
+            Assert.IsFalse(wasClaimDequeued);
             Console.WriteLine(wasClaimDequeued);
+        }
+
+        [TestMethod]
+        public void TestClaimValidityTest()
+        {
+            //Arrange
+            DateTime timeGreaterTest = new DateTime(2020, 10, 1);
+            DateTime timeLesserTestFail = new DateTime(2020, 8, 1);
+            DateTime timeLesserTestPass = new DateTime(2020, 9, 26);
+            ClaimRepositoryQueue claimRepositoryQueue = new ClaimRepositoryQueue();
+
+            //ACT
+            bool invalidClaim = claimRepositoryQueue.TestClaimValidity(timeLesserTestFail, timeGreaterTest);
+            bool validClaim = claimRepositoryQueue.TestClaimValidity(timeLesserTestPass, timeGreaterTest);
+
+            //Assert
+            Assert.IsFalse(invalidClaim);
+            Assert.IsTrue(validClaim);
+            Console.WriteLine(invalidClaim);
+            Console.WriteLine(validClaim);
         }
     }
 }

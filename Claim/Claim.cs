@@ -8,10 +8,10 @@ namespace ClaimRepository
 {
     public class Claim
     {
-        public enum ClaimType { Car, Home, Theft}
+        //public enum ClaimType { Car, Home, Theft}
 
         public int ClaimID { get; set; }
-        public ClaimType Type { get; set; }
+        public string Type { get; set; }
         public string Description { get; set; }
         public decimal ClaimAmount { get; set; }
         public DateTime DateOfIncident { get; set; }
@@ -20,7 +20,7 @@ namespace ClaimRepository
 
         public Claim() { }
 
-        public Claim(int claimID, ClaimType type, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
+        public Claim(int claimID, string type, string description, decimal claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
         {
             ClaimID = claimID;
             Type = type;
@@ -30,6 +30,5 @@ namespace ClaimRepository
             DateOfClaim = dateOfClaim;
             IsValid = isValid;
         }
-
     }
 }

@@ -26,13 +26,29 @@ namespace ClaimRepository
         }
 
         //Delete a claim, remove from queue
-        public bool RemoveClaimFromQueue(Claim claim)
+        public void RemoveClaimFromQueue()
         {
             int beforeDequeue = claimItem.Count;
             claimItem.Dequeue();
             bool isRemovedFromQ = (claimItem.Count < beforeDequeue);
-            return isRemovedFromQ;
+            Console.WriteLine(isRemovedFromQ);
+            return;
         }
 
+        //See if a claim is valid or not
+        public bool TestClaimValidity(DateTime incidentDate, DateTime claimDate)
+        {
+            DateTime dateGreater = new DateTime(2020, 10, 1);
+            DateTime dateLesser = new DateTime(2020, 9, 1);
+            
+            TimeSpan claimPeriod = new TimeSpan();
+            TimeSpan validPeriod = new TimeSpan();
+
+            claimPeriod = claimDate - incidentDate;
+            validPeriod = dateGreater - dateLesser;
+
+            bool claimIsValid = (claimPeriod < validPeriod);
+            return claimIsValid;
+        }
     }
 }
