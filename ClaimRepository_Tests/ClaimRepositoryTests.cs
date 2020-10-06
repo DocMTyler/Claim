@@ -22,7 +22,6 @@ namespace ClaimRepository_Tests
             Assert.IsTrue(addedToQueue);
             Console.WriteLine(addedToQueue);
         }
-
         [TestMethod]
         public void ReadClaimsTest()
         {
@@ -39,7 +38,6 @@ namespace ClaimRepository_Tests
             Assert.IsTrue(queueHasClaims);
             Console.WriteLine(queueHasClaims);
         }
-
         [TestMethod]
         public void RemoveClaimFromQueueTest()
         {
@@ -58,7 +56,6 @@ namespace ClaimRepository_Tests
             Assert.IsFalse(wasClaimDequeued);
             Console.WriteLine(wasClaimDequeued);
         }
-
         [TestMethod]
         public void TestClaimValidityTest()
         {

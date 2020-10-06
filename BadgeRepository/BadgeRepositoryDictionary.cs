@@ -8,11 +8,24 @@ namespace BadgeRepository
 {
     public class BadgeRepositoryDictionary
     {
-        Dictionary<Badge, List<Access>> badgeAccess = new Dictionary<Badge, List<Access>>();
-        List<Access> doorAccess = new List<Access>();
+        Dictionary<int, List<string>> badgeAccess = new Dictionary<int, List<string>>();
+        List<string> doorAccess = new List<string>();
+
+        //Get values at key
+        public List<string> GetValues(int badgeID)
+        {
+            foreach(KeyValuePair<int, List<string>> value in badgeAccess)
+            {
+                if (value.Key == badgeID)
+                {
+                    return value.Value;
+                }
+            }return default;
+            
+        }
 
         //Add to access list
-        public List<Access> AddDoorAccess(Access door)
+        public List<string> AddDoorAccess(string door)
         {
             int beforeAdded = doorAccess.Count;
             doorAccess.Add(door);
@@ -21,34 +34,42 @@ namespace BadgeRepository
         }
 
         //Create a dictionary of Badge(key), Access(value) pairs
-        public bool AddBadgeAccessToDict (Badge badge, List<Access> access)
+        public Dictionary<int,List<string>> AddBadgeAccessToDict (Badge badge)
         {
             int countBeforeAdded = badgeAccess.Count;
-            badgeAccess[badge] = access;
+            badgeAccess.Add(badge.BadgeID,badge.DoorAccess);
             bool isAdded = (badgeAccess.Count > countBeforeAdded);
-            return isAdded;
+            Console.WriteLine(isAdded);
+            //Console.WriteLine("You have added " + badgeAccess + " to the master badge list.");
+            return badgeAccess;
         }
 
         //Return all items in the dictionary
-        public Dictionary<Badge,List<Access>> ListBadgeAccess()
+        public Dictionary<int,List<string>> ListBadgeAccess()
         {
             return badgeAccess;
         } 
 
         //Remove from access list
-        public List<Access> RemoveDoorAccess(Access door)
+        public List<string> RemoveDoorAccess(string door)
         {
+            int beforeRemoved = doorAccess.Count;
             doorAccess.Remove(door);
+            bool wasRemoved = (beforeRemoved > doorAccess.Count);
+            Console.WriteLine("Removed from list, True or False?");
+            Console.WriteLine(wasRemoved);
             return doorAccess;
         }
         
         //Update the Access(value) of a specified Badge(key)
-        public bool UpdateAccess(Badge badgeID, List<Access> access)
+        public void UpdateAccess(int badgeID, List<string> access)
         {
             var beforeUpdate = badgeAccess[badgeID].Count;
             badgeAccess[badgeID] = access;
             bool wasUpdated = (badgeAccess[badgeID].Count != beforeUpdate);
-            return wasUpdated;
+            Console.WriteLine("Was the access for this badge updated, True or False?");
+            Console.WriteLine(wasUpdated);
+            return;
         }
     }
 }

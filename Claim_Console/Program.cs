@@ -81,7 +81,6 @@ namespace Claim_Console
                 claimEntries.AddClaimToQueue(homeClaim);
                 claimEntries.AddClaimToQueue(theftClaim);
             }
-
             void ReadAllClaims()
             {
                 Queue<Claim> listClaims = claimEntries.ReadClaims();
@@ -91,13 +90,11 @@ namespace Claim_Console
                 }
 
             }
-            
             void RemoveClaimFromQ()
             {
                 
                 claimEntries.RemoveClaimFromQueue();
             }
-
             void AddClaimToQ()
             {
                 claimCount++;
